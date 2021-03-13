@@ -28,7 +28,10 @@ public class StudentServiceImpl implements StudentService {
     public Student postStudent(StudentRequest studentRequest) {
         if (schoolRepository.findById(studentRequest.getSchoolId()).isPresent()) {
             School school = schoolRepository.findById(studentRequest.getSchoolId()).get();
-            return studentRepository.save(new Student(studentRequest, school));
+            Student student = new Student(studentRequest, school);
+            school.registerStudent(student);
+            schoolRepository.save(school);
+            return studentRepository.save(student);
         } else {
             throw new ApiException(ApiErrorCode.SCHOOL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }

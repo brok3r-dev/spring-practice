@@ -14,7 +14,7 @@ public class ApiControllerAdvice {
     @ResponseBody
     public ResponseEntity<ApiErrorResponse> handleException(Exception ex) {
         ApiErrorResponse rsp = new ApiErrorResponse(
-                ex.hashCode(),
+                ApiErrorCode.INTERNAL_SERVER_ERROR,
                 ex.getMessage(),
                 new Date()
         );
@@ -26,7 +26,7 @@ public class ApiControllerAdvice {
     @ResponseBody
     public ResponseEntity<ApiErrorResponse> handleApiException(ApiException ex) {
         ApiErrorResponse rsp = new ApiErrorResponse(
-                ex.getHttpStatus().hashCode(),
+                ex.getApiErrorCode(),
                 ex.getMessage(),
                 new Date()
         );

@@ -11,7 +11,7 @@ public class StudentResponse {
     private final String address;
     private final String phoneNumber;
     private final Grade grade;
-    private final SchoolResponse school;
+    private final String schoolName;
 
     public StudentResponse(Student student) {
         this.id = student.getId();
@@ -19,6 +19,6 @@ public class StudentResponse {
         this.address = student.getAddress();
         this.phoneNumber = student.getPhoneNumber();
         this.grade = student.getGrade();
-        this.school = new SchoolResponse(student.getSchool());
+        this.schoolName = student.getSchool().getName();
     }
 }

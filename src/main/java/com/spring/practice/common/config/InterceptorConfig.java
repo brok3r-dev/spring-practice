@@ -15,21 +15,19 @@ public class InterceptorConfig implements HandlerInterceptor {
     private final Logger logger = LogManager.getLogger();
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         logger.info("----- START COMMUNICATION -----");
         logger.info("Request URI: " + request.getRequestURI());
 
         if (!request.getHeader("Authorization").equals("SPRING_PRACTICE")) {
             throw new ApiException(ApiErrorCode.INVALID_AUTH_VALUE, HttpStatus.BAD_REQUEST);
-        } else {
-            logger.info("Header Verified!");
         }
 
-        return false;
+        return true;
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
         logger.info("Response Status: " + response.getStatus());
         logger.info("----- END COMMUNICATION -----");
     }

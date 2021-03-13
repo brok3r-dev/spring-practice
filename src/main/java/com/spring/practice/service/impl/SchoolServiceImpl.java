@@ -23,7 +23,6 @@ public class SchoolServiceImpl implements SchoolService {
     public School postSchool(SchoolRequest schoolRequest) {
         School school = schoolRepository.findByName(schoolRequest.getName());
         if (school != null) { throw new ApiException(ApiErrorCode.SCHOOL_ALREADY_EXIST, HttpStatus.BAD_REQUEST); }
-
         return schoolRepository.save(new School(schoolRequest));
     }
 

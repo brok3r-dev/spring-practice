@@ -16,6 +16,7 @@ public enum ApiErrorCode {
     //endregion
 
     String message;
+
     ApiErrorCode(String message) {
         this.message = message;
     }

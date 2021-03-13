@@ -7,12 +7,12 @@ import java.util.Date;
 
 @Getter
 public class ApiErrorResponse {
-    private int code;
-    private String message;
+    private final ApiErrorCode code;
+    private final String message;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
-    private Date timestamp;
+    private final Date timestamp;
 
-    public ApiErrorResponse(int code, String message, Date timestamp) {
+    public ApiErrorResponse(ApiErrorCode code, String message, Date timestamp) {
         this.code = code;
         this.message = message;
         this.timestamp = timestamp;
