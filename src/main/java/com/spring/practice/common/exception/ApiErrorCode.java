@@ -8,7 +8,7 @@ public enum ApiErrorCode {
 
     //region /school
     SCHOOL_NOT_FOUND("학교를 찾을 수 없습니다."),
-    SCHOOL_ALREADY_EXIST("이미 등록된 학교입니다."),
+    SCHOOL_ALREADY_EXIST("이미 등록된 이름의 학교입니다."),
     SCHOOL_CANNOT_BE_DELETED("학생이 존재하여 학교를 제거할 수 없습니다."),
     //endregion
 

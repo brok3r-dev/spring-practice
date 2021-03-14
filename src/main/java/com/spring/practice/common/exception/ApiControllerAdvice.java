@@ -19,7 +19,7 @@ public class ApiControllerAdvice {
                 new Date()
         );
 
-        return new ResponseEntity<ApiErrorResponse>(rsp, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(rsp, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(ApiException.class)
@@ -31,6 +31,6 @@ public class ApiControllerAdvice {
                 new Date()
         );
 
-        return new ResponseEntity<ApiErrorResponse>(rsp, ex.getHttpStatus());
+        return new ResponseEntity<>(rsp, ex.getHttpStatus());
     }
 }
