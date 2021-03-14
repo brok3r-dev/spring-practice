@@ -41,6 +41,13 @@ public class Student {
         this.school = sc;
     }
 
+    public void updateStudent(StudentRequest st) {
+        this.name = st.getName();
+        this.address = st.getAddress();
+        this.phoneNumber = st.getPhoneNumber();
+        this.grade = st.getGrade();
+    }
+
     public void moveSchool(School s) {
         this.school = s;
     }

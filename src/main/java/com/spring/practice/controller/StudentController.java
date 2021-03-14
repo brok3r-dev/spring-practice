@@ -17,21 +17,42 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping("/register")
-    ResponseEntity<?> postStudent(
+    ResponseEntity<?> registerStudent(
             @RequestBody @Validated StudentRequest studentRequest
     ) {
-        return ResponseEntity.ok(new StudentResponse(studentService.postStudent(studentRequest)));
+        return ResponseEntity.ok(new StudentResponse(studentService.registerStudent(studentRequest)));
+    }
+
+    @PostMapping("/update")
+    ResponseEntity<?> updateStudent(
+            @RequestBody @Validated StudentRequest studentRequest
+    ) {
+        return ResponseEntity.ok(new StudentResponse(studentService.updateStudent(studentRequest)));
     }
 
     @GetMapping("/find/all")
-    ResponseEntity<?> getAllStudents() {
-        return ResponseEntity.ok(studentService.getAllStudents().stream().map(StudentResponse::new).collect(Collectors.toList()));
+    ResponseEntity<?> findAllStudents() {
+        return ResponseEntity.ok(studentService.findAllStudents().stream().map(StudentResponse::new).collect(Collectors.toList()));
     }
 
     @GetMapping("/find/{name}")
-    ResponseEntity<?> getStudents(
+    ResponseEntity<?> findStudents(
             @PathVariable("name") String name
     ) {
-        return ResponseEntity.ok(studentService.getStudents(name).stream().map(StudentResponse::new).collect(Collectors.toList()));
+        return ResponseEntity.ok(studentService.findStudents(name).stream().map(StudentResponse::new).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/find/id/{id}")
+    ResponseEntity<?> findStudent(
+            @PathVariable("id") Long id
+    ) {
+        return ResponseEntity.ok(new StudentResponse(studentService.findStudent(id)));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    ResponseEntity<?> deleteStudent(
+            @PathVariable("id") Long id
+    ) {
+        return ResponseEntity.ok(new StudentResponse(studentService.deleteStudent(id)));
     }
 }

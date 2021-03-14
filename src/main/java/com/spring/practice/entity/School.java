@@ -35,10 +35,22 @@ public class School {
         this.phoneNumber = s.getPhoneNumber();
     }
 
+    public void updateSchool(SchoolRequest s) {
+        this.name = s.getName();
+        this.address = s.getAddress();
+        this.phoneNumber = s.getPhoneNumber();
+    }
+
     public void registerStudent(Student s) {
         if (students == null) {
-            students = new HashSet<Student>();
+            students = new HashSet<>();
         }
         students.add(s);
+    }
+
+    public void unregisterStudent(Student s) {
+        if (students != null) {
+            students.remove(s);
+        }
     }
 }

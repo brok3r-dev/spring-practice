@@ -6,7 +6,10 @@ import com.spring.practice.entity.Student;
 import java.util.List;
 
 public interface StudentService {
-    Student postStudent(StudentRequest studentRequest);
-    List<Student> getAllStudents();
-    List<Student> getStudents(String name);
+    Student registerStudent(StudentRequest studentRequest);
+    Student updateStudent(StudentRequest studentRequest);
+    List<Student> findAllStudents();
+    List<Student> findStudents(String name);
+    Student findStudent(Long id);
+    Student deleteStudent(Long id);
 }

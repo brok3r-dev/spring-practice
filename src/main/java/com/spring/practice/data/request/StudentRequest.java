@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class StudentRequest {
+    private Long id;
     private String name;
     private String address;
     private String phoneNumber;
