@@ -3,6 +3,7 @@ package com.spring.practice.controller;
 import com.spring.practice.data.request.SchoolRequest;
 import com.spring.practice.data.response.SchoolResponse;
 import com.spring.practice.data.response.StudentResponse;
+import com.spring.practice.mapper.SchoolMapper;
 import com.spring.practice.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ import java.util.stream.Collectors;
 public class SchoolController {
     @Autowired
     private SchoolService schoolService;
+
+    @Autowired
+    private SchoolMapper schoolMapper;
 
     @PostMapping("/register")
     ResponseEntity<?> registerSchool(
@@ -33,14 +37,17 @@ public class SchoolController {
 
     @GetMapping("/find/all")
     ResponseEntity<?> findAllSchools() {
-        return ResponseEntity.ok(schoolService.findAllSchools().stream().map(SchoolResponse::new).collect(Collectors.toList()));
+//        return ResponseEntity.ok(schoolService.findAllSchools().stream().map(SchoolResponse::new).collect(Collectors.toList()));
+        System.out.println(schoolMapper.getNumberOfSchool());
+        return ResponseEntity.ok(schoolMapper.getAllSchools().stream().map(SchoolResponse::new).collect(Collectors.toList()));
     }
 
     @GetMapping("/find/{name}")
     ResponseEntity<?> findSchool(
             @PathVariable("name") String name
     ) {
-        return ResponseEntity.ok(new SchoolResponse(schoolService.findSchool(name)));
+//        return ResponseEntity.ok(new SchoolResponse(schoolService.findSchool(name)));
+        return ResponseEntity.ok(new SchoolResponse(schoolMapper.getSchool(name)));
     }
 
     @GetMapping("/get/students/{name}")

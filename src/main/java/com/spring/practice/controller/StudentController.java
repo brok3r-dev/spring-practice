@@ -2,6 +2,7 @@ package com.spring.practice.controller;
 
 import com.spring.practice.data.request.StudentRequest;
 import com.spring.practice.data.response.StudentResponse;
+import com.spring.practice.mapper.StudentMapper;
 import com.spring.practice.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,9 @@ import java.util.stream.Collectors;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private StudentMapper studentMapper;
 
     @PostMapping("/register")
     ResponseEntity<?> registerStudent(
