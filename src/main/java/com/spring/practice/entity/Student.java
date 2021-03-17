@@ -33,6 +33,13 @@ public class Student {
     @JoinColumn(name = "school_id", referencedColumnName = "id")
     private School school;
 
+    public Student(String name, String address, String phoneNumber, Grade grade) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.grade = grade;
+    }
+
     public Student(StudentRequest st, School sc) {
         this.name = st.getName();
         this.address = st.getAddress();

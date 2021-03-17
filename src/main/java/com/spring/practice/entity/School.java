@@ -29,6 +29,12 @@ public class School {
     @OneToMany(mappedBy = "school")
     private Set<Student> students;
 
+    public School(String name, String address, String phoneNumber) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
     public School(SchoolRequest s) {
         this.name = s.getName();
         this.address = s.getAddress();
