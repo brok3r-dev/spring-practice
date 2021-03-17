@@ -18,9 +18,6 @@ public class SchoolController {
     @Autowired
     private SchoolService schoolService;
 
-    @Autowired
-    private SchoolMapper schoolMapper;
-
     @PostMapping("/register")
     ResponseEntity<?> registerSchool(
             @RequestBody @Validated SchoolRequest schoolRequest
@@ -37,17 +34,14 @@ public class SchoolController {
 
     @GetMapping("/find/all")
     ResponseEntity<?> findAllSchools() {
-//        return ResponseEntity.ok(schoolService.findAllSchools().stream().map(SchoolResponse::new).collect(Collectors.toList()));
-        System.out.println(schoolMapper.getNumberOfSchool());
-        return ResponseEntity.ok(schoolMapper.getAllSchools().stream().map(SchoolResponse::new).collect(Collectors.toList()));
+        return ResponseEntity.ok(schoolService.findAllSchools().stream().map(SchoolResponse::new).collect(Collectors.toList()));
     }
 
     @GetMapping("/find/{name}")
     ResponseEntity<?> findSchool(
             @PathVariable("name") String name
     ) {
-//        return ResponseEntity.ok(new SchoolResponse(schoolService.findSchool(name)));
-        return ResponseEntity.ok(new SchoolResponse(schoolMapper.getSchool(name)));
+        return ResponseEntity.ok(new SchoolResponse(schoolService.findSchool(name)));
     }
 
     @GetMapping("/get/students/{name}")
