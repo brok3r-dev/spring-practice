@@ -29,15 +29,19 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private Grade grade;
 
+    @Column(name = "fcm_token")
+    private String fcmToken;
+
     @ManyToOne
     @JoinColumn(name = "school_id", referencedColumnName = "id")
     private School school;
 
-    public Student(String name, String address, String phoneNumber, Grade grade) {
+    public Student(String name, String address, String phoneNumber, Grade grade, String token) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.grade = grade;
+        this.fcmToken = token;
     }
 
     public Student(StudentRequest st, School sc) {
@@ -45,6 +49,7 @@ public class Student {
         this.address = st.getAddress();
         this.phoneNumber = st.getPhoneNumber();
         this.grade = st.getGrade();
+        this.fcmToken = st.getFcmToken();
         this.school = sc;
     }
 

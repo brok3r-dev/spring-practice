@@ -11,4 +11,5 @@ public class StudentRequest {
     private String phoneNumber;
     private Grade grade;
     private Long schoolId;
+    private String fcmToken;
 }

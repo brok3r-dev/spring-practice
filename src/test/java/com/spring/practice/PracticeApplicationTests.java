@@ -55,8 +55,8 @@ class PracticeApplicationTests {
 	@DisplayName("Test for student registration and deletion")
     void RegisterStudent() {
         //given
-        Student studentA = new Student("Test A", "Test A", "00000000", Grade.E_SECOND);
-        Student studentB = new Student("Test B", "Test B", "11111111", Grade.H_FIRST);
+        Student studentA = new Student("Test A", "Test A", "00000000", Grade.E_SECOND, "");
+        Student studentB = new Student("Test B", "Test B", "11111111", Grade.H_FIRST, "");
 
         //when
         Student resultA = studentRepository.save(studentA);

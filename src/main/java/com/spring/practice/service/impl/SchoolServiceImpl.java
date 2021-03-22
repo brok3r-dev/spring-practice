@@ -1,7 +1,10 @@
 package com.spring.practice.service.impl;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.spring.practice.common.exception.ApiErrorCode;
 import com.spring.practice.common.exception.ApiException;
+import com.spring.practice.common.util.Util;
 import com.spring.practice.data.request.SchoolRequest;
 import com.spring.practice.entity.School;
 import com.spring.practice.entity.Student;
@@ -14,12 +17,16 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class SchoolServiceImpl implements SchoolService {
     @Autowired
     private SchoolRepository schoolRepository;
+
+    @Autowired
+    private FirebaseApp firebaseApp;
 
     @Override
     @Transactional
@@ -81,5 +88,26 @@ public class SchoolServiceImpl implements SchoolService {
         } else {
             throw new ApiException(ApiErrorCode.SCHOOL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Override
+    public boolean alertAllStudents(String name) {
+        Set<Student> students = schoolRepository.findByName(name).getStudents();
+
+        if (students == null) {
+            throw new ApiException(ApiErrorCode.STUDENT_NOT_FOUND, HttpStatus.NOT_FOUND);
+        }
+
+        boolean alertStatus = true;
+
+        for (Student student : students) {
+            try {
+                FirebaseMessaging.getInstance(firebaseApp).send(new Util().createMessage(student.getFcmToken()));
+            } catch (Exception e) {
+                alertStatus = false;
+            }
+        }
+
+        return alertStatus;
     }
 }

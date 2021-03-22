@@ -32,6 +32,13 @@ public class SchoolController {
         return ResponseEntity.ok(new SchoolResponse(schoolService.updateSchool(schoolRequest)));
     }
 
+    @PostMapping("/alert")
+    ResponseEntity<?> alertAllStudents(
+            @RequestBody @Validated SchoolRequest schoolRequest
+    ) {
+        return ResponseEntity.ok(schoolService.alertAllStudents(schoolRequest.getName()));
+    }
+
     @GetMapping("/find/all")
     ResponseEntity<?> findAllSchools() {
         return ResponseEntity.ok(schoolService.findAllSchools().stream().map(SchoolResponse::new).collect(Collectors.toList()));
