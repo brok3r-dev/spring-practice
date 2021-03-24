@@ -1,6 +1,3 @@
-# OBJECTIVES
->##### Spring Security 개념 공부 및 적용
-- - -
 ### UPDATE (2021년 3월 24일)
 >FilterConfig.java (added)
 >- SchoolFilter, StudentFilter를 register하는 역할
@@ -25,6 +22,9 @@ public class CommonFilter implements Filter {...}
 
 >SchoolFilter.java, StudentFilter.java (added)
 
+- - -
+#### OBJECTIVES
+>##### Spring Security 개념 공부 및 적용
 - - -
 #### DESCRIPTION
 - 언어: Java 8
