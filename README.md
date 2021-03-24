@@ -7,7 +7,11 @@
 
 ```java
 @Configuration
-public class FilterConfig {...}
+public class FilterConfig {
+    @Bean
+    public FilterRegistrationBean<SchoolFilter> schoolFilterFilterRegistrationBean() {...}
+    ...
+}
 ```
 
 >CommonFilter.java (added)
