@@ -1,26 +1,34 @@
 # OBJECTIVES
->- Spring Security 개념 공부 및 적용
->- Spring Filter, Interceptor, AOP 개념 공부 및 적용
+>##### Spring Security 개념 공부 및 적용
 - - -
-### UPDATE (2021년 3월 22일)
-- Firebase Cloud Messaging 기능 추가
->FCMConfig.java
+### UPDATE (2021년 3월 24일)
+>FilterConfig.java (added)
+>- SchoolFilter, StudentFilter를 register하는 역할
+
 ```java
 @Configuration
-public FirebaseApp getFirebaseApp() throws Exception {...}
+public class FilterConfig {...}
 ```
-> SchoolController.java
+
+>CommonFilter.java (added)
+>- CommonFilter는 URL 상관없이 항상 거쳐가는 Filter
+
 ```java
-@PostMapping("/alert")
-ResponseEntity<?> alertAllStudents(...) {...}
+@Component
+@Order(1)
+public class CommonFilter implements Filter {...}
 ```
+
+>SchoolFilter.java, StudentFilter.java (added)
+
 - - -
 #### DESCRIPTION
 - 언어: Java 8
 - 프레임워크: Spring
-- DB: MariaDB
+- 데이터베이스: MariaDB
+- 운영체제: Windows 10
 - - -
 #### INFORMATION
-- created by 강재훈(Jay Kang)
-- created date 2021-03-13
-- last modified 2021-03-22
+- Created By 강재훈(Jay Kang)
+- Created Date 2021년 3월 13일
+- Last Modified 2021년 3월 24일
