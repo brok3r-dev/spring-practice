@@ -1,6 +1,7 @@
 ### UPDATE (2021년 3월 25일)
 >LoggingAdvice.java (added)
 >- SchoolController에 대한 log 생성
+>
 >![log](https://user-images.githubusercontent.com/61440369/112455330-f59c2e00-8d9c-11eb-8825-c1c852def988.PNG)
 
 ```java
