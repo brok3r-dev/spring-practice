@@ -17,7 +17,5 @@ public class SchoolFilter implements Filter {
         logger.info("----- SCHOOL FILTER -----");
 
         chain.doFilter(request, response);
-
-        logger.info("-----  END   FILTER -----");
     }
 }

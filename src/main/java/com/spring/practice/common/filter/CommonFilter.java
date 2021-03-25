@@ -16,9 +16,8 @@ public class CommonFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         logger.info("----- COMMON FILTER -----");
+        logger.info("Server Name: " + request.getServerName());
 
         chain.doFilter(request, response);
-
-        logger.info("-----  END   FILTER -----");
     }
 }

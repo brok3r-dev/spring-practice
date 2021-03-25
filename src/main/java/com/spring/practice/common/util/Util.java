@@ -3,6 +3,12 @@ package com.spring.practice.common.util;
 import com.google.firebase.messaging.*;
 
 public class Util {
+    private static final Util util = new Util();
+
+    public static Util getInstance() {
+        return util;
+    }
+
     public Message createMessage(String token) {
         Notification notification = Notification.builder()
                 .setTitle("스프링 테스트 메세지")

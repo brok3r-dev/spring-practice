@@ -17,7 +17,5 @@ public class StudentFilter implements Filter {
         logger.info("----- STUDENT FILTER -----");
 
         chain.doFilter(request, response);
-
-        logger.info("-----   END   FILTER -----");
     }
 }

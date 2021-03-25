@@ -102,7 +102,7 @@ public class SchoolServiceImpl implements SchoolService {
 
         for (Student student : students) {
             try {
-                FirebaseMessaging.getInstance(firebaseApp).send(new Util().createMessage(student.getFcmToken()));
+                FirebaseMessaging.getInstance(firebaseApp).send(Util.getInstance().createMessage(student.getFcmToken()));
             } catch (Exception e) {
                 alertStatus = false;
             }

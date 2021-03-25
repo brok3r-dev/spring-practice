@@ -20,6 +20,8 @@ public class InterceptorConfig implements HandlerInterceptor {
         logger.info("Request URI: " + request.getRequestURI());
 
         if (!request.getHeader("Authorization").equals("SPRING_PRACTICE")) {
+            logger.info("Response Status: 400");
+            logger.info("----- END COMMUNICATION -----");
             throw new ApiException(ApiErrorCode.INVALID_AUTH_VALUE, HttpStatus.BAD_REQUEST);
         }
 
