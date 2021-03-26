@@ -16,10 +16,7 @@ import java.util.Arrays;
 public class LoggingAdvice {
     private final Logger logger = LogManager.getLogger();
 
-    @Pointcut(value = "execution(* com.spring.practice.controller.SchoolController.*(..))")
-    public void schoolPointCut() {}
-
-    @Around("schoolPointCut()")
+    @Around("execution(* com.spring.practice.controller.SchoolController.*(..))")
     public Object loggingAdvice(ProceedingJoinPoint point) throws Throwable {
         ObjectMapper mapper = new ObjectMapper();
 
