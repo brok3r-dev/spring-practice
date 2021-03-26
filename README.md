@@ -31,6 +31,6 @@ implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 #### INFORMATION
 - Created By 강재훈(Jay Kang)
 - Created Date 2021년 3월 13일
-- Last Modified 2021년 3월 25일
+- Last Modified 2021년 3월 26일
 
 - - -
