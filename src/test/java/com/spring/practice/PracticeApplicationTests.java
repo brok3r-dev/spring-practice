@@ -5,11 +5,12 @@ import com.spring.practice.entity.School;
 import com.spring.practice.entity.Student;
 import com.spring.practice.repository.SchoolRepository;
 import com.spring.practice.repository.StudentRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @DisplayName("JUnit 5 사용 연습")
@@ -32,23 +33,23 @@ class PracticeApplicationTests {
 		School resultB = schoolRepository.save(schoolB);
 
         //then
-		Assertions.assertAll("result A", () -> {
-			Assertions.assertEquals(resultA.getName(), schoolA.getName(), "name is different");
-			Assertions.assertEquals(resultA.getAddress(), schoolA.getAddress(), "address is different");
-			Assertions.assertEquals(resultA.getPhoneNumber(), schoolA.getPhoneNumber(), "phone number is different");
+		assertAll("result A", () -> {
+			assertEquals(resultA.getName(), schoolA.getName(), "name is different");
+			assertEquals(resultA.getAddress(), schoolA.getAddress(), "address is different");
+			assertEquals(resultA.getPhoneNumber(), schoolA.getPhoneNumber(), "phone number is different");
 		});
 
-		Assertions.assertAll("result B", () -> {
-			Assertions.assertEquals(resultB.getName(), schoolB.getName(), "name is different");
-			Assertions.assertEquals(resultB.getAddress(), schoolB.getAddress(), "address is different");
-			Assertions.assertEquals(resultB.getPhoneNumber(), schoolB.getPhoneNumber(), "phone number is different");
+		assertAll("result B", () -> {
+			assertEquals(resultB.getName(), schoolB.getName(), "name is different");
+			assertEquals(resultB.getAddress(), schoolB.getAddress(), "address is different");
+			assertEquals(resultB.getPhoneNumber(), schoolB.getPhoneNumber(), "phone number is different");
 		});
 
 		schoolRepository.delete(resultA);
 		schoolRepository.delete(resultB);
 
-		Assertions.assertFalse(schoolRepository.findById(resultA.getId()).isPresent(), "result A was not removed");
-		Assertions.assertFalse(schoolRepository.findById(resultB.getId()).isPresent(), "result B was not removed");
+		assertFalse(schoolRepository.findById(resultA.getId()).isPresent(), "result A was not removed");
+		assertFalse(schoolRepository.findById(resultB.getId()).isPresent(), "result B was not removed");
     }
 
     @Test
@@ -63,24 +64,24 @@ class PracticeApplicationTests {
         Student resultB = studentRepository.save(studentB);
 
         //then
-		Assertions.assertAll("result A", () -> {
-			Assertions.assertEquals(resultA.getName(), studentA.getName(), "name is different");
-			Assertions.assertEquals(resultA.getAddress(), studentA.getAddress(), "address is different");
-			Assertions.assertEquals(resultA.getPhoneNumber(), studentA.getPhoneNumber(), "phone number is different");
-			Assertions.assertEquals(resultA.getGrade(), studentA.getGrade(), "grade is different");
+		assertAll("result A", () -> {
+			assertEquals(resultA.getName(), studentA.getName(), "name is different");
+			assertEquals(resultA.getAddress(), studentA.getAddress(), "address is different");
+			assertEquals(resultA.getPhoneNumber(), studentA.getPhoneNumber(), "phone number is different");
+			assertEquals(resultA.getGrade(), studentA.getGrade(), "grade is different");
 		});
 
-		Assertions.assertAll("result B", () -> {
-			Assertions.assertEquals(resultB.getName(), studentB.getName(), "name is different");
-			Assertions.assertEquals(resultB.getAddress(), studentB.getAddress(), "address is different");
-			Assertions.assertEquals(resultB.getPhoneNumber(), studentB.getPhoneNumber(), "phone number is different");
-			Assertions.assertEquals(resultB.getGrade(), studentB.getGrade(), "grade is different");
+		assertAll("result B", () -> {
+			assertEquals(resultB.getName(), studentB.getName(), "name is different");
+			assertEquals(resultB.getAddress(), studentB.getAddress(), "address is different");
+			assertEquals(resultB.getPhoneNumber(), studentB.getPhoneNumber(), "phone number is different");
+			assertEquals(resultB.getGrade(), studentB.getGrade(), "grade is different");
 		});
 
 		studentRepository.delete(resultA);
 		studentRepository.delete(resultB);
 
-		Assertions.assertFalse(studentRepository.findById(resultA.getId()).isPresent());
-		Assertions.assertFalse(studentRepository.findById(resultB.getId()).isPresent());
+		assertFalse(studentRepository.findById(resultA.getId()).isPresent());
+		assertFalse(studentRepository.findById(resultB.getId()).isPresent());
     }
 }

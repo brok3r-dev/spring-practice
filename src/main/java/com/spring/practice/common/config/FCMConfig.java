@@ -15,7 +15,7 @@ import java.io.FileInputStream;
 public class FCMConfig {
     @Bean
     public FirebaseApp getFirebaseApp() throws Exception {
-        FileInputStream serviceAccount = new FileInputStream("src/main/resources/spring-practice-8e691-firebase-adminsdk-5w3w7-b8a0264afa.json");
+        FileInputStream serviceAccount = new FileInputStream("src/main/resources/fcm-spring.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
