@@ -1,30 +1,22 @@
-### UPDATE (2021년 3월 25일)
->LoggingAdvice.java (added)
->- SchoolController에 대한 log 생성
->
->![log](https://user-images.githubusercontent.com/61440369/112455330-f59c2e00-8d9c-11eb-8825-c1c852def988.PNG)
+### UPDATE (2021년 3월 26일)
+>ViewController.java (added)
+> - HTML을 이용한 View 생성
 
 ```java
-@Aspect
-@Component
-public class LoggingAdvice {...}
+@Controller
+@RequestMapping("/view")
+public class ViewController {...}
 ```
 
->Util.java (modified)
->- Singleton 패턴 적용 
-
-```java
-private static final Util util = new Util();
-
-public static Util getInstance() {
-    return util;
-}
+```gradle
+implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 ```
 
 - - -
 
 #### OBJECTIVES
-> ##### Spring Security 개념 공부 및 적용
+> ##### Spring Security 개념 공부 및 개발
+> ##### Cache 개념 공부 및 개발
 
 - - -
 
