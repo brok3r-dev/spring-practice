@@ -1,15 +1,14 @@
-### UPDATE (2021년 3월 26일)
->ViewController.java (added)
-> - HTML을 이용한 View 생성
-
-```java
-@Controller
-@RequestMapping("/view")
-public class ViewController {...}
+### UPDATE (2021년 4월 2일)
+```gradle
+implementation 'org.springframework.boot:spring-boot-starter-security'
 ```
 
-```gradle
-implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+> SecurityConfig.java 추가
+
+```java
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {...}
 ```
 
 - - -
@@ -31,6 +30,6 @@ implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 #### INFORMATION
 - Created By 강재훈(Jay Kang)
 - Created Date 2021년 3월 13일
-- Last Modified 2021년 3월 25일
+- Last Modified 2021년 4월 2일
 
 - - -
