@@ -15,7 +15,7 @@ public class ApiControllerAdvice {
     public ResponseEntity<ApiErrorResponse> handleException(Exception ex) {
         ApiErrorResponse rsp = new ApiErrorResponse(
                 ApiErrorCode.INTERNAL_SERVER_ERROR,
-                ex.getMessage(),
+                ex.getLocalizedMessage(),
                 new Date()
         );
 

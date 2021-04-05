@@ -1,14 +1,19 @@
-### UPDATE (2021년 4월 2일)
-```gradle
-implementation 'org.springframework.boot:spring-boot-starter-security'
-```
-
-> SecurityConfig.java 추가
+### UPDATE (2021년 4월 5일)
+> 권한 설정 변경
+> 1. SecurityConfig.java:
+> - antMatchers() 제거
+> - @EnableGlobalMethodSecurity(prePostEnabled = true) 추가
+> 2. SchoolController.java, StudentController.java:
+> - @PreAuthorize() 추가
 
 ```java
-@Configuration
-@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {...}
+```
+
+```java
+@PreAuthorize("hasAuthority('student:write')")
+ResponseEntity<?> registerStudent(...) {...}
 ```
 
 - - -
@@ -30,6 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {...}
 #### INFORMATION
 - Created By 강재훈(Jay Kang)
 - Created Date 2021년 3월 13일
-- Last Modified 2021년 4월 2일
+- Last Modified 2021년 4월 5일
 
 - - -

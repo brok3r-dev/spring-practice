@@ -7,6 +7,7 @@ import com.spring.practice.mapper.SchoolMapper;
 import com.spring.practice.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,13 +20,15 @@ public class SchoolController {
     private SchoolService schoolService;
 
     @PostMapping("/register")
+    @PreAuthorize("hasAuthority('school:write')")
     ResponseEntity<?> registerSchool(
             @RequestBody @Validated SchoolRequest schoolRequest
     ) {
         return ResponseEntity.ok(new SchoolResponse(schoolService.registerSchool(schoolRequest)));
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
+    @PreAuthorize("hasAuthority('school:write')")
     ResponseEntity<?> updateSchool(
             @RequestBody @Validated SchoolRequest schoolRequest
     ) {
@@ -33,6 +36,7 @@ public class SchoolController {
     }
 
     @PostMapping("/alert")
+    @PreAuthorize("hasAuthority('school:write')")
     ResponseEntity<?> alertAllStudents(
             @RequestBody @Validated SchoolRequest schoolRequest
     ) {
@@ -40,11 +44,13 @@ public class SchoolController {
     }
 
     @GetMapping("/find/all")
+    @PreAuthorize("hasAuthority('school:read')")
     ResponseEntity<?> findAllSchools() {
         return ResponseEntity.ok(schoolService.findAllSchools().stream().map(SchoolResponse::new).collect(Collectors.toList()));
     }
 
     @GetMapping("/find/{name}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     ResponseEntity<?> findSchool(
             @PathVariable("name") String name
     ) {
@@ -52,6 +58,7 @@ public class SchoolController {
     }
 
     @GetMapping("/get/students/{name}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     ResponseEntity<?> getAllStudents(
             @PathVariable("name") String name
     ) {
@@ -59,6 +66,7 @@ public class SchoolController {
     }
 
     @DeleteMapping("/delete/{name}")
+    @PreAuthorize("hasAuthority('school:write')")
     ResponseEntity<?> deleteSchool(
             @PathVariable("name") String name
     ) {

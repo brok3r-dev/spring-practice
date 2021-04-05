@@ -7,18 +7,18 @@ import com.spring.practice.repository.SchoolRepository;
 import com.spring.practice.repository.StudentRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@DisplayName("JUnit 5 사용 연습")
+@DisplayName("JUnit 5 Example")
 class PracticeApplicationTests {
-	@Autowired
+	@Mock
 	private SchoolRepository schoolRepository;
 
-    @Autowired
+    @Mock
 	private StudentRepository studentRepository;
 
     @Test
