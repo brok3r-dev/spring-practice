@@ -5,6 +5,7 @@
 > - @EnableGlobalMethodSecurity(prePostEnabled = true) 추가
 > 2. SchoolController.java, StudentController.java:
 > - @PreAuthorize() 추가
+> 3. Basic -> Form Based Auth 수정
 
 ```java
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -14,6 +15,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {...}
 ```java
 @PreAuthorize("hasAuthority('student:write')")
 ResponseEntity<?> registerStudent(...) {...}
+```
+
+```java
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http...
+        .formLogin() //Form Based Auth
+        .loginPage("/login").permitAll()  //Custom Login Page
+        .defaultSuccessUrl("/", true)
+        .and()
+        .rememberMe() //Session ID settings
+            .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(10))
+            .key("secured");
+}
 ```
 
 - - -

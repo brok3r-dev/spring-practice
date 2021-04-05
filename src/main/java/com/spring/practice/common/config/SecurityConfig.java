@@ -13,6 +13,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+
+import java.util.concurrent.TimeUnit;
 
 import static com.spring.practice.common.enums.UserPermission.*;
 import static com.spring.practice.common.enums.UserRole.*;
@@ -33,8 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
-    /** 권한 제어 및 인증 방법 조정
-     * 사용자 마다 사용할 수 있는 API 제어 및 인증 방법 조정
+    /**
+     * Form Based Authentication 사용
+     * Custom Login Page 추가
+     * .rememberMe: .tokenValiditySeconds(...) = Session ID 유지 시간 조정
+     *              .key(...) = MD5 hash code 생성 코드
      * @param http: HttpSecurity
      * @throws Exception: exception
      */
@@ -47,7 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/", true)
+                .and()
+                .rememberMe()
+                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(10))
+                    .key("secured");
     }
 
     /**
