@@ -26,7 +26,7 @@ public class School {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "school")
+    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
     private Set<Student> students;
 
     public School(String name, String address, String phoneNumber) {

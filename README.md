@@ -1,46 +1,37 @@
-### UPDATE (2021년 4월 5일)
-> 권한 설정 변경
-> 1. SecurityConfig.java:
-> - antMatchers() 제거
-> - @EnableGlobalMethodSecurity(prePostEnabled = true) 추가
-> 2. SchoolController.java, StudentController.java:
-> - @PreAuthorize() 추가
-> 3. Basic -> Form Based Auth 수정
+### UPDATE (2021년 4월 7일)
+> DB를 이용한 회원 관리 시스템
+> 1. AuthenticationManagerBuilder를 이용한 회원 정보 조회 방법 사용
+> 2. UserDetail 테이블 생성 및 유저 정보 등록
+> 3. UserDetailsService implementation 추가
 
 ```java
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {...}
-```
+class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {...}
 
-```java
-@PreAuthorize("hasAuthority('student:write')")
-ResponseEntity<?> registerStudent(...) {...}
-```
-
-```java
-@Override
-protected void configure(HttpSecurity http) throws Exception {
-    http...
-        .formLogin() //Form Based Auth
-        .loginPage("/login").permitAll()  //Custom Login Page
-        .defaultSuccessUrl("/", true)
-        .and()
-        .rememberMe() //Session ID settings
-            .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(10))
-            .key("secured");
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {...}
 }
+```
+
+```java
+public class UserDetail implements UserDetails {...}
+```
+
+```java
+public class UserDetailsServiceImpl implements UserDetailsService {...}
 ```
 
 - - -
 
 #### OBJECTIVES
-> ##### Spring Security 개념 공부 및 개발
-> ##### Cache 개념 공부 및 개발
+- Spring Security 개념 공부 및 개발 (80% 완료)
+- Cache 개념 공부 및 개발
 
 - - -
 
 #### DESCRIPTION
-- 언어: Java 8
+- 언어: Java 8, HTML
 - 프레임워크: Spring
 - 데이터베이스: MariaDB
 - 운영체제: Windows 10
@@ -48,8 +39,8 @@ protected void configure(HttpSecurity http) throws Exception {
 - - -
 
 #### INFORMATION
-- Created By 강재훈(Jay Kang)
-- Created Date 2021년 3월 13일
-- Last Modified 2021년 4월 5일
+- 만든이: 강재훈
+- 제작일: 2021년 03월 13일
+- 수정일: 2021년 04월 07일
 
 - - -
