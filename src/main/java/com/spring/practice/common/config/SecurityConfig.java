@@ -74,6 +74,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/login");
     }
 
+    /**
+     * UserDetailsService를 참조하여 DB 또는 메모리에 저장된 회원 정보 조회
+     * 조회된 데이터를 사용하여 회원 인증 작업
+     * @param auth: AuthenticationManagerBuilder
+     * @throws Exception: UserNotFoundException
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());

@@ -17,11 +17,14 @@ import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
-    @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
+    private final SchoolRepository schoolRepository;
 
     @Autowired
-    private SchoolRepository schoolRepository;
+    public StudentServiceImpl(StudentRepository studentRepository, SchoolRepository schoolRepository) {
+        this.studentRepository = studentRepository;
+        this.schoolRepository = schoolRepository;
+    }
 
     @Override
     @Transactional
@@ -89,7 +92,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public Student deleteStudent(Long id) {
+    public Student unregisterStudent(Long id) {
         if (studentRepository.findById(id).isPresent()) {
             Student student = studentRepository.findById(id).get();
 

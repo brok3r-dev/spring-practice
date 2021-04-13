@@ -1,26 +1,10 @@
-### UPDATE (2021년 4월 7일)
+### UPDATE (2021년 4월 13일)
+> Teacher 테이블 추가 및 복습
+
 > DB를 이용한 회원 관리 시스템
 > 1. AuthenticationManagerBuilder를 이용한 회원 정보 조회 방법 사용
 > 2. UserDetail 테이블 생성 및 유저 정보 등록
 > 3. UserDetailsService implementation 추가
-
-```java
-class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {...}
-
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {...}
-}
-```
-
-```java
-public class UserDetail implements UserDetails {...}
-```
-
-```java
-public class UserDetailsServiceImpl implements UserDetailsService {...}
-```
 
 - - -
 
@@ -31,7 +15,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {...}
 - - -
 
 #### DESCRIPTION
-- 언어: Java 8, HTML
+- 언어: Java 8, Spring Boot, HTML
 - 프레임워크: Spring
 - 데이터베이스: MariaDB
 - 운영체제: Windows 10
@@ -41,6 +25,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {...}
 #### INFORMATION
 - 만든이: 강재훈
 - 제작일: 2021년 03월 13일
-- 수정일: 2021년 04월 07일
+- 수정일: 2021년 04월 13일
 
 - - -

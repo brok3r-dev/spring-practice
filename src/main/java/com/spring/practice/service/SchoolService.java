@@ -12,6 +12,6 @@ public interface SchoolService {
     List<School> findAllSchools();
     School findSchool(String name);
     List<Student> getAllStudents(String name);
-    School deleteSchool(String name);
+    School unregisterSchool(String name);
     boolean alertAllStudents(String name);
 }

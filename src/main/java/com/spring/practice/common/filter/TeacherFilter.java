@@ -8,12 +8,12 @@ import javax.servlet.*;
 import java.io.IOException;
 
 @Order(2)
-public class StudentFilter implements Filter {
+public class TeacherFilter implements Filter {
     private final Logger logger = LogManager.getLogger();
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        logger.info("----- STUDENT FILTER -----");
+        logger.info("----- TEACHER FILTER -----");
 
         chain.doFilter(request, response);
     }

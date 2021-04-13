@@ -3,7 +3,6 @@ package com.spring.practice.controller;
 import com.spring.practice.data.request.SchoolRequest;
 import com.spring.practice.data.response.SchoolResponse;
 import com.spring.practice.data.response.StudentResponse;
-import com.spring.practice.mapper.SchoolMapper;
 import com.spring.practice.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +15,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/school")
 public class SchoolController {
+    private final SchoolService schoolService;
+
     @Autowired
-    private SchoolService schoolService;
+    public SchoolController(SchoolService schoolService) {
+        this.schoolService = schoolService;
+    }
 
     @PostMapping("/register")
     @PreAuthorize("hasAuthority('school:write')")
@@ -67,9 +70,9 @@ public class SchoolController {
 
     @DeleteMapping("/delete/{name}")
     @PreAuthorize("hasAuthority('school:write')")
-    ResponseEntity<?> deleteSchool(
+    ResponseEntity<?> unregisterSchool(
             @PathVariable("name") String name
     ) {
-        return ResponseEntity.ok(new SchoolResponse(schoolService.deleteSchool(name)));
+        return ResponseEntity.ok(new SchoolResponse(schoolService.unregisterSchool(name)));
     }
 }

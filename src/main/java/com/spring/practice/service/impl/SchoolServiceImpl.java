@@ -22,11 +22,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class SchoolServiceImpl implements SchoolService {
-    @Autowired
-    private SchoolRepository schoolRepository;
+    private final SchoolRepository schoolRepository;
+    private final FirebaseApp firebaseApp;
 
     @Autowired
-    private FirebaseApp firebaseApp;
+    public SchoolServiceImpl(SchoolRepository schoolRepository, FirebaseApp firebaseApp) {
+        this.schoolRepository = schoolRepository;
+        this.firebaseApp = firebaseApp;
+    }
 
     @Override
     @Transactional
@@ -75,7 +78,7 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     @Transactional
-    public School deleteSchool(String name) {
+    public School unregisterSchool(String name) {
         School school = schoolRepository.findByName(name);
         if (school != null) {
             // TODO: check existing students before deleting school

@@ -29,6 +29,9 @@ public class School {
     @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
     private Set<Student> students;
 
+    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
+    private Set<Teacher> teachers;
+
     public School(String name, String address, String phoneNumber) {
         this.name = name;
         this.address = address;
@@ -48,15 +51,24 @@ public class School {
     }
 
     public void registerStudent(Student s) {
-        if (students == null) {
-            students = new HashSet<>();
-        }
+        if (students == null) { students = new HashSet<>(); }
         students.add(s);
     }
 
     public void unregisterStudent(Student s) {
         if (students != null) {
             students.remove(s);
+        }
+    }
+
+    public void registerTeacher(Teacher t) {
+        if (teachers == null) { teachers = new HashSet<>(); }
+        teachers.add(t);
+    }
+
+    public void unregisterTeacher(Teacher t) {
+        if (teachers != null) {
+            teachers.remove(t);
         }
     }
 }

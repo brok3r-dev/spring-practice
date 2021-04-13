@@ -11,5 +11,5 @@ public interface StudentService {
     List<Student> findAllStudents();
     List<Student> findStudents(String name);
     Student findStudent(Long id);
-    Student deleteStudent(Long id);
+    Student unregisterStudent(Long id);
 }

@@ -2,6 +2,7 @@ package com.spring.practice.common.config;
 
 import com.spring.practice.common.filter.SchoolFilter;
 import com.spring.practice.common.filter.StudentFilter;
+import com.spring.practice.common.filter.TeacherFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,14 @@ public class FilterConfig {
         FilterRegistrationBean<SchoolFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new SchoolFilter());
         registrationBean.addUrlPatterns("/school/*");
+        return registrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean<TeacherFilter> teacherFilterFilterRegistrationBean() {
+        FilterRegistrationBean<TeacherFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new TeacherFilter());
+        registrationBean.addUrlPatterns("/teacher/*");
         return registrationBean;
     }
 

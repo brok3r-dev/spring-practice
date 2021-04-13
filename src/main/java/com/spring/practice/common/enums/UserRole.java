@@ -13,7 +13,8 @@ import static com.spring.practice.common.enums.UserPermission.*;
  * UserRole 또는 UserPermission 을 이용하여 권한 설정
  */
 public enum UserRole {
-    ADMIN(Sets.newHashSet(SCHOOL_WRITE, SCHOOL_READ, STUDENT_WRITE, STUDENT_READ)),
+    ADMIN(Sets.newHashSet(SCHOOL_WRITE, SCHOOL_READ, TEACHER_WRITE, TEACHER_READ, STUDENT_WRITE, STUDENT_READ)),
+    MANAGER(Sets.newHashSet(SCHOOL_READ, TEACHER_WRITE, TEACHER_READ, STUDENT_WRITE, STUDENT_READ)),
     USER(Sets.newHashSet(SCHOOL_READ, STUDENT_READ));
 
     private final Set<UserPermission> permissions;
