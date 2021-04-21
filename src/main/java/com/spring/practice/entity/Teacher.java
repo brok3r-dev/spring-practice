@@ -3,16 +3,18 @@ package com.spring.practice.entity;
 import com.spring.practice.data.request.TeacherRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Teacher")
 @NoArgsConstructor
+@Setter
 @Getter
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")

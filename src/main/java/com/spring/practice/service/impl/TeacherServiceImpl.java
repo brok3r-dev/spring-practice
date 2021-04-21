@@ -32,7 +32,6 @@ public class TeacherServiceImpl implements TeacherService {
             School school = schoolRepository.findById(teacherRequest.getSchoolId()).get();
             Teacher teacher = new Teacher(teacherRequest, school);
             return teacherRepository.save(teacher);
-
         } else {
             throw new ApiException(ApiErrorCode.SCHOOL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }

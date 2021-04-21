@@ -9,7 +9,7 @@ public class ApiException extends RuntimeException {
     private final HttpStatus httpStatus;
 
     public ApiException(ApiErrorCode apiErrorCode, HttpStatus httpStatus) {
-        super(apiErrorCode.message);
+        super(apiErrorCode.getMessage());
         this.apiErrorCode = apiErrorCode;
         this.httpStatus = httpStatus;
     }

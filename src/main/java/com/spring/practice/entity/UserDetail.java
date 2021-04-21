@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 public class UserDetail implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "username", length = 20)
@@ -40,6 +40,10 @@ public class UserDetail implements UserDetails {
 
     @Column(name = "is_enabled")
     private boolean isEnabled;
+
+    public UserDetail(String username) {
+        this.username = username;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

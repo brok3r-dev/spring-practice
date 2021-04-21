@@ -4,16 +4,18 @@ import com.spring.practice.common.enums.Grade;
 import com.spring.practice.data.request.StudentRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Student")
 @NoArgsConstructor
+@Setter
 @Getter
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")

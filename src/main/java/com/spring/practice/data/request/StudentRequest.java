@@ -2,7 +2,9 @@ package com.spring.practice.data.request;
 
 import com.spring.practice.common.enums.Grade;
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 public class StudentRequest {
     private Long id;

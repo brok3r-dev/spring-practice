@@ -20,9 +20,13 @@ public enum ApiErrorCode {
     TEACHER_NOT_FOUND("선생님을 찾을 수 없습니다.");
     //endregion
 
-    String message;
+    private final String message;
 
     ApiErrorCode(String message) {
         this.message = message;
+    }
+
+    public String getMessage() {
+        return this.message;
     }
 }

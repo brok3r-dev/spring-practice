@@ -4,7 +4,13 @@ import lombok.Getter;
 
 @Getter
 public class SchoolRequest {
-    private String name;
-    private String address;
-    private String phoneNumber;
+    private final String name;
+    private final String address;
+    private final String phoneNumber;
+
+    public SchoolRequest(String name, String address, String phoneNumber) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
 }

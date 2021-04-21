@@ -69,10 +69,14 @@ public class SchoolServiceImpl implements SchoolService {
     public List<Student> getAllStudents(String name) {
         School school = schoolRepository.findByName(name);
 
-        if (school != null) {
-            return new ArrayList<>(school.getStudents());
-        } else {
+        if (school == null) {
             throw new ApiException(ApiErrorCode.SCHOOL_NOT_FOUND, HttpStatus.NOT_FOUND);
+        } else if (school.getStudents() == null) {
+            throw new ApiException(ApiErrorCode.STUDENT_NOT_FOUND, HttpStatus.NOT_FOUND);
+        } else if (school.getStudents().isEmpty()) {
+            throw new ApiException(ApiErrorCode.STUDENT_NOT_FOUND, HttpStatus.NOT_FOUND);
+        } else {
+            return new ArrayList<>(school.getStudents());
         }
     }
 
@@ -81,11 +85,6 @@ public class SchoolServiceImpl implements SchoolService {
     public School unregisterSchool(String name) {
         School school = schoolRepository.findByName(name);
         if (school != null) {
-            // TODO: check existing students before deleting school
-            if (school.getStudents().size() > 0) {
-                throw new ApiException(ApiErrorCode.SCHOOL_CANNOT_BE_DELETED, HttpStatus.BAD_REQUEST);
-            }
-
             schoolRepository.delete(school);
             return school;
         } else {
@@ -95,15 +94,19 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public boolean alertAllStudents(String name) {
-        Set<Student> students = schoolRepository.findByName(name).getStudents();
+        School school = schoolRepository.findByName(name);
 
-        if (students == null) {
+        if (school == null) {
+            throw new ApiException(ApiErrorCode.SCHOOL_NOT_FOUND, HttpStatus.NOT_FOUND);
+        }
+
+        if (school.getStudents() == null) {
             throw new ApiException(ApiErrorCode.STUDENT_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
 
         boolean alertStatus = true;
 
-        for (Student student : students) {
+        for (Student student : school.getStudents()) {
             try {
                 FirebaseMessaging.getInstance(firebaseApp).send(Util.getInstance().createMessage(student.getFcmToken()));
             } catch (Exception e) {
