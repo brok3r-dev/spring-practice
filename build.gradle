@@ -37,12 +37,13 @@ dependencies {
 	implementation 'com.google.guava:guava:30.1.1-jre'
 
 	//Firebase Cloud Messaging
-	implementation 'com.google.firebase:firebase-admin:7.1.1'
+	implementation 'com.google.firebase:firebase-admin:7.2.0'
 
 	runtimeOnly 'mysql:mysql-connector-java'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'com.h2database:h2'
 }
 

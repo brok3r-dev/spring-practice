@@ -15,12 +15,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/student")
 public class StudentController {
     private final StudentService studentService;
-//    private final StudentMapper studentMapper;
 
     @Autowired
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
-//        this.studentMapper = studentMapper;
     }
 
     @PostMapping("/register")

@@ -1,12 +1,16 @@
 package com.spring.practice.data.request;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
 @Getter
+@Setter
 public class SchoolRequest {
-    private final String name;
-    private final String address;
-    private final String phoneNumber;
+    private String name;
+    private String address;
+    private String phoneNumber;
 
     public SchoolRequest(String name, String address, String phoneNumber) {
         this.name = name;
