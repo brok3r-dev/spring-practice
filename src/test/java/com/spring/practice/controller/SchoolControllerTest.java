@@ -76,7 +76,7 @@ class SchoolControllerTest {
 
     @Test
     @WithMockUser(authorities = "school:write")
-    void updateSchool() throws Exception {
+    void canUpdateSchool() throws Exception {
         //region given
         String content = mapper.writeValueAsString(request);
         String response = mapper.writeValueAsString(new SchoolResponse(school));
@@ -159,7 +159,7 @@ class SchoolControllerTest {
 
     @Test
     @WithMockUser(authorities = "school:write")
-    void unregisterSchool() throws Exception {
+    void canUnregisterSchool() throws Exception {
         //region given
         String response = mapper.writeValueAsString(new SchoolResponse(school));
         when(service.unregisterSchool("Hero Academia")).thenReturn(school);

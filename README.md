@@ -1,20 +1,21 @@
-## UPDATE (2021년 5월 1일)
-1. 유닛 테스트 작성
-- JUnit 5, Mockito, MockMvc 사용
-- Controller 유닛 테스트 작성
-- 관련 클래스 폴더: src/test/java/.../controller
+## UPDATE (2021년 5월 19일)
+1. School Integration Test 작성중
 
 ```java
-@WebMvcTest(SchoolController.class)
-class SchoolControllerTest {
-    //컨트롤러 유닛 테스트 작성
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = { TestConfig.class })
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql("/test.sql")
+public class SchoolTest {
+    // test/java/com/spring/practice/SchoolTest.java
 }
 ```
+
 - - -
 
 ### WHAT's NEXT
-1. Integration Test 공부 및 작성
-2. Cache 공부 및 적용
+1. Integration Test
+2. Cache
 
 - - -
 
@@ -29,6 +30,6 @@ class SchoolControllerTest {
 ### AUTHOR
 - 만든이: 강재훈
 - 제작일: 2021년 03월 13일
-- 수정일: 2021년 05월 01일
+- 수정일: 2021년 05월 19일
 
 - - -
