@@ -1,14 +1,11 @@
-## UPDATE (2021년 5월 19일)
-1. School Integration Test 작성중
+## UPDATE (2021년 5월 22일)
+1. Tomcat JDBC 활용한 DB 설정
 
-```java
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { TestConfig.class })
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql("/test.sql")
-public class SchoolTest {
-    // test/java/com/spring/practice/SchoolTest.java
-}
+```properties
+spring.datasource.type=org.apache.tomcat.jdbc.pool.DataSource
+spring.datasource.tomcat.initial-size=15
+spring.datasource.tomcat.max-wait=2000
+spring.datasource.tomcat.max-active=50
 ```
 
 - - -
@@ -30,6 +27,6 @@ public class SchoolTest {
 ### AUTHOR
 - 만든이: 강재훈
 - 제작일: 2021년 03월 13일
-- 수정일: 2021년 05월 19일
+- 수정일: 2021년 05월 22일
 
 - - -

@@ -16,6 +16,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -45,31 +47,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//JWT 특징인 Stateless에 맞춰 세션 설정
-                .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtDto)) //JWT Authentication 필터 적용
-                .addFilterAfter(new JwtVerificationFilter(jwtDto), JwtAuthenticationFilter.class) //JWT Token Verification 필터 적용
+                //region JWT
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//JWT 특징인 Stateless에 맞춰 세션 설정
+//                .and()
+//                .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtDto)) //JWT Authentication 필터 적용
+//                .addFilterAfter(new JwtVerificationFilter(jwtDto), JwtAuthenticationFilter.class) //JWT Token Verification 필터 적용
+                //endregion
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .anyRequest()
-                .authenticated();
-
-        //region Not Used
-//                .and()
-//                .formLogin()
-//                    .loginPage("/login").permitAll()
-//                    .defaultSuccessUrl("/welcome", true)
-//                .and()
-//                .rememberMe()
-//                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(10))
-//                    .key("secured")
-//                .and()
-//                .logout()
-//                    .logoutUrl("/logout")
-//                    .clearAuthentication(true)
-//                    .invalidateHttpSession(true)
-//                    .deleteCookies("JSESSIONID", "remember-me")
-//                    .logoutSuccessUrl("/login");
+                .authenticated()
+        //region Form Based Login
+                .and()
+                .formLogin()
+                    .loginPage("/login").permitAll()
+                    .defaultSuccessUrl("/welcome", true)
+                .and()
+                .rememberMe()
+                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(10))
+                    .key("secured")
+                .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .clearAuthentication(true)
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID", "remember-me")
+                    .logoutSuccessUrl("/login");
         //endregion
     }
 
