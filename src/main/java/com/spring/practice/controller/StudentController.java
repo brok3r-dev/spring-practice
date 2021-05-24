@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,7 +24,7 @@ public class StudentController {
 
     @PostMapping("/register")
     @PreAuthorize("hasAuthority('student:write')")
-    ResponseEntity<?> registerStudent(
+    public ResponseEntity<StudentResponse> registerStudent(
             @RequestBody @Validated StudentRequest studentRequest
     ) {
         return ResponseEntity.ok(new StudentResponse(studentService.registerStudent(studentRequest)));
@@ -31,7 +32,7 @@ public class StudentController {
 
     @PutMapping("/update")
     @PreAuthorize("hasAuthority('student:write')")
-    ResponseEntity<?> updateStudent(
+    public ResponseEntity<StudentResponse> updateStudent(
             @RequestBody @Validated StudentRequest studentRequest
     ) {
         return ResponseEntity.ok(new StudentResponse(studentService.updateStudent(studentRequest)));
@@ -39,13 +40,13 @@ public class StudentController {
 
     @GetMapping("/find/all")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    ResponseEntity<?> findAllStudents() {
+    public ResponseEntity<List<StudentResponse>> findAllStudents() {
         return ResponseEntity.ok(studentService.findAllStudents().stream().map(StudentResponse::new).collect(Collectors.toList()));
     }
 
     @GetMapping("/find/{name}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    ResponseEntity<?> findStudents(
+    public ResponseEntity<List<StudentResponse>> findStudents(
             @PathVariable("name") String name
     ) {
         return ResponseEntity.ok(studentService.findStudents(name).stream().map(StudentResponse::new).collect(Collectors.toList()));
@@ -53,7 +54,7 @@ public class StudentController {
 
     @GetMapping("/find/id/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    ResponseEntity<?> findStudent(
+    public ResponseEntity<StudentResponse> findStudent(
             @PathVariable("id") Long id
     ) {
         return ResponseEntity.ok(new StudentResponse(studentService.findStudent(id)));
@@ -61,7 +62,7 @@ public class StudentController {
 
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAuthority('student:write')")
-    ResponseEntity<?> unregisterStudent(
+    public ResponseEntity<StudentResponse> unregisterStudent(
             @PathVariable("id") Long id
     ) {
         return ResponseEntity.ok(new StudentResponse(studentService.unregisterStudent(id)));

@@ -1,8 +1,6 @@
 package com.spring.practice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.spring.practice.data.JwtDto;
 import com.spring.practice.data.request.SchoolRequest;
 import com.spring.practice.data.response.SchoolResponse;
@@ -25,7 +23,6 @@ import java.util.Arrays;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(SchoolController.class)

@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -24,7 +25,7 @@ public class SchoolController {
 
     @PostMapping("/register")
     @PreAuthorize("hasAuthority('school:write')")
-    ResponseEntity<?> registerSchool(
+    public ResponseEntity<SchoolResponse> registerSchool(
             @RequestBody @Validated SchoolRequest schoolRequest
     ) {
         return ResponseEntity.ok(new SchoolResponse(schoolService.registerSchool(schoolRequest)));
@@ -32,7 +33,7 @@ public class SchoolController {
 
     @PutMapping("/update")
     @PreAuthorize("hasAuthority('school:write')")
-    ResponseEntity<?> updateSchool(
+    public ResponseEntity<SchoolResponse> updateSchool(
             @RequestBody @Validated SchoolRequest schoolRequest
     ) {
         return ResponseEntity.ok(new SchoolResponse(schoolService.updateSchool(schoolRequest)));
@@ -40,7 +41,7 @@ public class SchoolController {
 
     @PostMapping("/alert")
     @PreAuthorize("hasAuthority('school:write')")
-    ResponseEntity<?> alertAllStudents(
+    public ResponseEntity<Boolean> alertAllStudents(
             @RequestBody @Validated SchoolRequest schoolRequest
     ) {
         return ResponseEntity.ok(schoolService.alertAllStudents(schoolRequest.getName()));
@@ -48,13 +49,13 @@ public class SchoolController {
 
     @GetMapping("/find/all")
     @PreAuthorize("hasAuthority('school:read')")
-    ResponseEntity<?> findAllSchools() {
+    public ResponseEntity<List<SchoolResponse>> findAllSchools() {
         return ResponseEntity.ok(schoolService.findAllSchools().stream().map(SchoolResponse::new).collect(Collectors.toList()));
     }
 
     @GetMapping("/find/{name}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    ResponseEntity<?> findSchool(
+    public ResponseEntity<SchoolResponse> findSchool(
             @PathVariable("name") String name
     ) {
         return ResponseEntity.ok(new SchoolResponse(schoolService.findSchool(name)));
@@ -62,15 +63,15 @@ public class SchoolController {
 
     @GetMapping("/get/students/{name}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    ResponseEntity<?> getAllStudents(
+    public ResponseEntity<List<StudentResponse>> getAllStudents(
             @PathVariable("name") String name
     ) {
-        return ResponseEntity.ok(schoolService.getAllStudents(name).stream().map(StudentResponse::new));
+        return ResponseEntity.ok(schoolService.getAllStudents(name).stream().map(StudentResponse::new).collect(Collectors.toList()));
     }
 
     @DeleteMapping("/delete/{name}")
     @PreAuthorize("hasAuthority('school:write')")
-    ResponseEntity<?> unregisterSchool(
+    public ResponseEntity<SchoolResponse> unregisterSchool(
             @PathVariable("name") String name
     ) {
         return ResponseEntity.ok(new SchoolResponse(schoolService.unregisterSchool(name)));

@@ -1,18 +1,20 @@
-## UPDATE (2021년 5월 22일)
-1. Tomcat JDBC 활용한 DB 설정
+## UPDATE (2021년 5월 24일)
+1. 종합 테스트 작성 완료
 
-```properties
-spring.datasource.type=org.apache.tomcat.jdbc.pool.DataSource
-spring.datasource.tomcat.initial-size=15
-spring.datasource.tomcat.max-wait=2000
-spring.datasource.tomcat.max-active=50
+```java
+@SpringBootTest
+@Transactional
+public class SchoolIntegrationTest {
+    @Autowired SchoolController controller;
+    
+    //종합 테스트 메서드
+}
 ```
 
 - - -
 
 ### WHAT's NEXT
-1. Integration Test
-2. Cache
+2. 캐시 종류 공부 및 개발
 
 - - -
 
@@ -27,6 +29,6 @@ spring.datasource.tomcat.max-active=50
 ### AUTHOR
 - 만든이: 강재훈
 - 제작일: 2021년 03월 13일
-- 수정일: 2021년 05월 22일
+- 수정일: 2021년 05월 24일
 
 - - -

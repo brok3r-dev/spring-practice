@@ -17,7 +17,7 @@ public class TeacherResponse {
         this.name = teacher.getName();
         this.address = teacher.getAddress();
         this.phoneNumber = teacher.getPhoneNumber();
-        this.schoolId = teacher.getId();
+        this.schoolId = teacher.getSchool().getId();
         this.fcmToken = teacher.getFcmToken();
     }
 }

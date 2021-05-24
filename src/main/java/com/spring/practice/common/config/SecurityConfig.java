@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsServiceImpl userDetailsService;
-    private final JwtDto jwtDto;
+//    private final JwtDto jwtDto;
 
     /**
      * 비밀번호 인코더를 가져와서 사용함
@@ -32,10 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * 참고: PasswordConfig.java
      */
     @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder, UserDetailsServiceImpl userDetailsService, JwtDto jwtDto) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, UserDetailsServiceImpl userDetailsService) {//, JwtDto jwtDto) {
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
-        this.jwtDto = jwtDto;
+//        this.jwtDto = jwtDto;
     }
 
     /**
