@@ -20,12 +20,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
+@Sql("/test.sql")
 public class SchoolIntegrationTest {
     @Autowired SchoolController controller;
 
     @Test
     @WithMockUser(authorities = "school:write")
-    @Sql("/test.sql")
     void canRegisterSchool() {
         //given
         SchoolRequest request = new SchoolRequest("Test School", "in Seoul", "02-000-0000");
@@ -42,7 +42,6 @@ public class SchoolIntegrationTest {
 
     @Test
     @WithMockUser(authorities = "school:write")
-    @Sql("/test.sql")
     void canUpdateSchool() {
         //given
         SchoolRequest request = new SchoolRequest("JeonBuk University", "in Gwangju", "053-000-0000");
@@ -59,7 +58,6 @@ public class SchoolIntegrationTest {
 
     @Test
     @WithMockUser(authorities = "school:write")
-    @Sql("/test.sql")
     void canAlertAllStudents() {
         //given
         SchoolRequest request = new SchoolRequest("Seoul University", "in Seoul", "02-000-0000");
@@ -73,7 +71,6 @@ public class SchoolIntegrationTest {
 
     @Test
     @WithMockUser(authorities = "school:read")
-    @Sql("/test.sql")
     void canFindAllSchools() {
         //when
         List<SchoolResponse> response = controller.findAllSchools().getBody();
@@ -88,7 +85,6 @@ public class SchoolIntegrationTest {
 
     @Test
     @WithMockUser(username = "user", password = "password")
-    @Sql("/test.sql")
     void canFindSchool() {
         //when
         SchoolResponse response = controller.findSchool("Seoul University").getBody();
@@ -102,7 +98,6 @@ public class SchoolIntegrationTest {
 
     @Test
     @WithMockUser(username = "user", password = "password")
-    @Sql("/test.sql")
     void canGetAllStudents() {
         //when
         List<StudentResponse> response = controller.getAllStudents("Busan University").getBody();
@@ -118,7 +113,6 @@ public class SchoolIntegrationTest {
 
     @Test
     @WithMockUser(authorities = "school:write")
-    @Sql("/test.sql")
     void canUnregisterSchool() {
         //when
         SchoolResponse response = controller.unregisterSchool("JeonBuk University").getBody();

@@ -11,6 +11,9 @@ import com.spring.practice.entity.Student;
 import com.spring.practice.repository.SchoolRepository;
 import com.spring.practice.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +55,16 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public List<School> findAllSchools() {
-        return schoolRepository.findAll();
+        //페이지 번호, 조회 개수, 정렬 기준
+        PageRequest request = PageRequest.of(0, 3, Sort.sort(School.class).by(School::getId).ascending());
+
+        Page<School> result = schoolRepository.findAll(request);
+
+        List<School> schools = result.getContent(); //조회된 데이터
+        int pages = result.getTotalPages();         //전체 페이지 수
+        boolean hasNextPage = result.hasNext();     //다음 페이지 존재 여부
+
+        return schools;
     }
 
     @Override

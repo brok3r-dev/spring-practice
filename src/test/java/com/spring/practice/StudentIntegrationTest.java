@@ -1,6 +1,5 @@
 package com.spring.practice;
 
-import com.spring.practice.common.enums.Grade;
 import com.spring.practice.controller.StudentController;
 import com.spring.practice.data.request.StudentRequest;
 import com.spring.practice.data.response.StudentResponse;
@@ -19,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
+@Sql("/test.sql")
 public class StudentIntegrationTest {
     @Autowired StudentController controller;
 
@@ -39,7 +39,6 @@ public class StudentIntegrationTest {
 
     @Test
     @WithMockUser(authorities = "student:write")
-    @Sql("/test.sql")
     void canRegisterStudent() {
         //when
         StudentResponse response = controller.registerStudent(request).getBody();
@@ -53,7 +52,6 @@ public class StudentIntegrationTest {
 
     @Test
     @WithMockUser(authorities = "student:write")
-    @Sql("/test.sql")
     void canUpdateStudent() {
         //when
         request.setId(5L);
@@ -68,7 +66,6 @@ public class StudentIntegrationTest {
 
     @Test
     @WithMockUser(username = "user", password = "password")
-    @Sql("/test.sql")
     void canFindAllStudents() {
         //when
         List<StudentResponse> response = controller.findAllStudents().getBody();
@@ -78,15 +75,10 @@ public class StudentIntegrationTest {
         assertThat(response.size()).isGreaterThan(1);
         response.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
         assertThat(response.get(0).getId()).isEqualTo(1L);
-        assertThat(response.get(0).getName()).isEqualTo("Student A");
-        assertThat(response.get(0).getAddress()).isEqualTo("in Seoul");
-        assertThat(response.get(0).getPhoneNumber()).isEqualTo("02-000-0000");
-        assertThat(response.get(0).getSchoolName()).isEqualTo("Seoul University");
     }
 
     @Test
     @WithMockUser(username = "user", password = "password")
-    @Sql("/test.sql")
     void canFindStudents() {
         //when
         List<StudentResponse> response = controller.findStudents("Student A").getBody();
@@ -94,43 +86,25 @@ public class StudentIntegrationTest {
         //then
         assertThat(response).isNotNull();
         assertThat(response.size()).isGreaterThan(1);
-        response.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
-        assertThat(response.get(1).getId()).isEqualTo(6L);
-        assertThat(response.get(1).getName()).isEqualTo("Student A");
-        assertThat(response.get(1).getAddress()).isEqualTo("in Iksan");
-        assertThat(response.get(1).getPhoneNumber()).isEqualTo("063-000-0000");
-        assertThat(response.get(1).getSchoolName()).isEqualTo("JeonBuk University");
     }
 
     @Test
     @WithMockUser(username = "user", password = "password")
-    @Sql("/test.sql")
     void canFindStudent() {
         //when
-        StudentResponse response = controller.findStudent(3L).getBody();
+        StudentResponse response = controller.findStudent(1L).getBody();
 
         //then
         assertThat(response).isNotNull();
-        assertThat(response.getId()).isEqualTo(3L);
-        assertThat(response.getName()).isEqualTo("Student C");
-        assertThat(response.getAddress()).isEqualTo("in Seoul");
-        assertThat(response.getPhoneNumber()).isEqualTo("02-000-0000");
-        assertThat(response.getSchoolName()).isEqualTo("Seoul University");
     }
 
     @Test
     @WithMockUser(authorities = "student:write")
-    @Sql("/test.sql")
     void canUnregisterStudent() {
         //when
-        StudentResponse response = controller.unregisterStudent(7L).getBody();
+        StudentResponse response = controller.unregisterStudent(1L).getBody();
 
         //then
         assertThat(response).isNotNull();
-        assertThat(response.getName()).isEqualTo("Student G");
-        assertThat(response.getAddress()).isEqualTo("in Iksan");
-        assertThat(response.getPhoneNumber()).isEqualTo("063-000-0000");
-        assertThat(response.getGrade()).isEqualTo(Grade.U_FIRST);
-        assertThat(response.getSchoolName()).isEqualTo("JeonBuk University");
     }
 }

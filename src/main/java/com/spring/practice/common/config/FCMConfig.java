@@ -10,15 +10,28 @@ import java.io.FileInputStream;
 
 @Configuration
 public class FCMConfig {
+    private FirebaseApp instance = null;
+
     @Bean
     @SuppressWarnings("deprecation")
     public FirebaseApp getFirebaseApp() throws Exception {
-        FileInputStream serviceAccount = new FileInputStream("src/main/resources/fcm-spring.json");
+        if (instance == null && !FirebaseApp.getApps().isEmpty()) {
+            for (FirebaseApp app : FirebaseApp.getApps()) {
+                if (app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
+                    instance = app;
+                    break;
+                }
+            }
+        } else {
+            FileInputStream serviceAccount = new FileInputStream("src/main/resources/fcm-spring.json");
 
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .build();
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .build();
 
-        return FirebaseApp.initializeApp(options);
+            instance = FirebaseApp.initializeApp(options);
+        }
+
+        return instance;
     }
 }
