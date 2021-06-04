@@ -1,4 +1,4 @@
-## UPDATE (2021년 5월 24일)
+## UPDATE (2021년 6월 4일)
 1. 종합 테스트 작성 완료
 
 ```java
@@ -14,7 +14,7 @@ public class SchoolIntegrationTest {
 - - -
 
 ### WHAT's NEXT
-2. 캐시 종류 공부 및 개발
+1. 캐시 종류 공부 및 개발
 
 - - -
 
@@ -29,6 +29,6 @@ public class SchoolIntegrationTest {
 ### AUTHOR
 - 만든이: 강재훈
 - 제작일: 2021년 03월 13일
-- 수정일: 2021년 05월 24일
+- 수정일: 2021년 06월 04일
 
 - - -
