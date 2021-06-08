@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .addFilterAfter(new JwtVerificationFilter(jwtDto), JwtAuthenticationFilter.class) //JWT Token Verification 필터 적용
                 //endregion
                 .authorizeRequests()
+                .antMatchers("/.~~spring-boot!~/**").permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest()
                 .authenticated()
@@ -61,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                     .loginPage("/login").permitAll()
-                    .defaultSuccessUrl("/welcome", true)
+                    .defaultSuccessUrl("/welcome", false)
                 .and()
                 .rememberMe()
                     .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(10))

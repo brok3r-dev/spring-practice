@@ -5,15 +5,13 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.FileInputStream;
+import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 public class FCMConfig {
     private FirebaseApp instance = null;
 
     @Bean
-    @SuppressWarnings("deprecation")
     public FirebaseApp getFirebaseApp() throws Exception {
         if (instance == null && !FirebaseApp.getApps().isEmpty()) {
             for (FirebaseApp app : FirebaseApp.getApps()) {
@@ -23,10 +21,8 @@ public class FCMConfig {
                 }
             }
         } else {
-            FileInputStream serviceAccount = new FileInputStream("src/main/resources/fcm-spring.json");
-
-            FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+            FirebaseOptions options = FirebaseOptions.builder()
+                    .setCredentials(GoogleCredentials.fromStream(new ClassPathResource("fcm-spring.json").getInputStream()))
                     .build();
 
             instance = FirebaseApp.initializeApp(options);

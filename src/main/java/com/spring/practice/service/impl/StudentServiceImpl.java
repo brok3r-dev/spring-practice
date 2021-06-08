@@ -5,10 +5,14 @@ import com.spring.practice.common.exception.ApiException;
 import com.spring.practice.data.request.StudentRequest;
 import com.spring.practice.entity.School;
 import com.spring.practice.entity.Student;
+import com.spring.practice.entity.Teacher;
 import com.spring.practice.repository.SchoolRepository;
 import com.spring.practice.repository.StudentRepository;
 import com.spring.practice.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -73,7 +77,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> findAllStudents() {
-        return studentRepository.findAll();
+        PageRequest request = PageRequest.of(0, 2, Sort.sort(Student.class).by(Student::getId).ascending());
+
+        Page<Student> result = studentRepository.findAll(request);
+
+        return result.getContent();
     }
 
     @Override

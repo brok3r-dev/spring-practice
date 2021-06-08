@@ -9,6 +9,9 @@ import com.spring.practice.repository.SchoolRepository;
 import com.spring.practice.repository.TeacherRepository;
 import com.spring.practice.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
@@ -60,7 +63,11 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public List<Teacher> findAllTeacher() {
-        return teacherRepository.findAll();
+        PageRequest request = PageRequest.of(0, 1, Sort.sort(Teacher.class).by(Teacher::getId).ascending());
+
+        Page<Teacher> result = teacherRepository.findAll(request);
+
+        return result.getContent();
     }
 
     @Override
